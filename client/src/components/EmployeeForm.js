@@ -8,7 +8,7 @@ const initialState = {
    salary: "",
 };
 
-const EmployeeForm = ({ setUpdated, updated, employee }) => {
+const EmployeeForm = ({ employee, closeModal }) => {
    const [formState, setFormState] = useState(initialState);
 
    useEffect(() => {
@@ -25,10 +25,10 @@ const EmployeeForm = ({ setUpdated, updated, employee }) => {
          },
          body: JSON.stringify(formState),
       });
-      const data = await response.json();
-      console.log(data);
+      //const data = await response.json();
       setFormState(initialState);
-      setUpdated(!updated);
+      //setUpdated(!updated);
+      closeModal();
    };
 
    const updateEmployee = async () => {
@@ -40,8 +40,9 @@ const EmployeeForm = ({ setUpdated, updated, employee }) => {
          body: JSON.stringify(formState),
       });
       const data = await response.json();
-      console.log(data);
-      setUpdated(!updated);
+
+      //setUpdated(!updated);
+      closeModal();
    };
 
    const handleChange = (e) => {

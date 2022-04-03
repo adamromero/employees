@@ -7,12 +7,11 @@ function App() {
    const [employees, setEmployees] = useState([]);
    const [loading, setLoading] = useState(true);
    const [modalIsOpen, setModalIsOpen] = useState(false);
-   const [editModalState, setEditModalState] = useState(false);
-   const [updated, setUpdated] = useState(false);
+   //const [editModalState, setEditModalState] = useState(false);
 
    useEffect(() => {
       getEmployees();
-   }, [employees, updated]);
+   }, [employees]);
 
    const getEmployees = async () => {
       const response = await fetch("/api/employees");
@@ -29,12 +28,7 @@ function App() {
          ) : (
             <div className="employee-list">
                {employees.map((employee) => (
-                  <EmployeeCard
-                     key={employee._id}
-                     employee={employee}
-                     updated={updated}
-                     setUpdated={setUpdated}
-                  />
+                  <EmployeeCard key={employee._id} employee={employee} />
                ))}
             </div>
          )}
@@ -43,8 +37,6 @@ function App() {
          <InputModal
             modalIsOpen={modalIsOpen}
             closeModal={() => setModalIsOpen(false)}
-            setUpdated={setUpdated}
-            updated={updated}
          />
       </div>
    );
