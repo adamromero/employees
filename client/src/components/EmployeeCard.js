@@ -11,7 +11,6 @@ const EmployeeCard = ({ employee }) => {
    };
 
    const handleDelete = () => {
-      console.log("delete");
       setIsDeleteModalOpen(true);
    };
 

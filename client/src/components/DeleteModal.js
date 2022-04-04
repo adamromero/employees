@@ -18,7 +18,7 @@ Modal.setAppElement("#root");
 
 const DeleteModal = ({ modalIsOpen, closeModal, employeeId }) => {
    const handleDelete = async () => {
-      const response = await fetch(`/api/employees/${employeeId}`, {
+      const response = await fetch(`http://localhost:5000/api/employees/${employeeId}`, {
          method: "DELETE",
       });
       //const data = await response.json();

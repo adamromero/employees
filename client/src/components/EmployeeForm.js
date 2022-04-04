@@ -18,7 +18,7 @@ const EmployeeForm = ({ employee, closeModal }) => {
    }, []);
 
    const createEmployee = async () => {
-      const response = await fetch("/api/employees", {
+      const response = await fetch("http://localhost:5000/api/employees", {
          method: "POST",
          headers: {
             "Content-Type": "application/json",
@@ -27,21 +27,18 @@ const EmployeeForm = ({ employee, closeModal }) => {
       });
       //const data = await response.json();
       setFormState(initialState);
-      //setUpdated(!updated);
       closeModal();
    };
 
    const updateEmployee = async () => {
-      const response = await fetch(`/api/employees/${employee._id}`, {
+      const response = await fetch(`http://localhost:5000/api/employees/${employee._id}`, {
          method: "PUT",
          headers: {
             "Content-Type": "application/json",
          },
          body: JSON.stringify(formState),
       });
-      const data = await response.json();
-
-      //setUpdated(!updated);
+      //const data = await response.json();
       closeModal();
    };
 
