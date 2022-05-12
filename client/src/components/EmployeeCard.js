@@ -2,7 +2,7 @@ import { useState } from "react";
 import InputModal from "./InputModal";
 import DeleteModal from "./DeleteModal";
 
-const EmployeeCard = ({ employee }) => {
+const EmployeeCard = ({ employee, isUpdated, setIsUpdated }) => {
    const [modalIsOpen, setModalIsOpen] = useState(false);
    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -32,11 +32,15 @@ const EmployeeCard = ({ employee }) => {
             modalIsOpen={modalIsOpen}
             closeModal={() => setModalIsOpen(false)}
             employee={employee}
+            isUpdated={isUpdated}
+            setIsUpdated={setIsUpdated}
          />
          <DeleteModal
             modalIsOpen={isDeleteModalOpen}
             closeModal={() => setIsDeleteModalOpen(false)}
             employeeId={employee._id}
+            isUpdated={isUpdated}
+            setIsUpdated={setIsUpdated}
          />
       </>
    );

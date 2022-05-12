@@ -17,14 +17,25 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const InputModal = ({ modalIsOpen, closeModal, employee }) => {
+const InputModal = ({
+   modalIsOpen,
+   closeModal,
+   employee,
+   isUpdated,
+   setIsUpdated,
+}) => {
    return (
       <Modal
          isOpen={modalIsOpen}
          onRequestClose={closeModal}
          style={customStyles}
       >
-         <EmployeeForm employee={employee} closeModal={closeModal} />
+         <EmployeeForm
+            employee={employee}
+            closeModal={closeModal}
+            isUpdated={isUpdated}
+            setIsUpdated={setIsUpdated}
+         />
       </Modal>
    );
 };

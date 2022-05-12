@@ -8,7 +8,7 @@ const initialState = {
    salary: "",
 };
 
-const EmployeeForm = ({ employee, closeModal }) => {
+const EmployeeForm = ({ employee, closeModal, isUpdated, setIsUpdated }) => {
    const [formState, setFormState] = useState(initialState);
 
    useEffect(() => {
@@ -27,18 +27,23 @@ const EmployeeForm = ({ employee, closeModal }) => {
       });
       //const data = await response.json();
       setFormState(initialState);
+      setIsUpdated(!isUpdated);
       closeModal();
    };
 
    const updateEmployee = async () => {
-      const response = await fetch(`http://localhost:5000/api/employees/${employee._id}`, {
-         method: "PUT",
-         headers: {
-            "Content-Type": "application/json",
-         },
-         body: JSON.stringify(formState),
-      });
+      const response = await fetch(
+         `http://localhost:5000/api/employees/${employee._id}`,
+         {
+            method: "PUT",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formState),
+         }
+      );
       //const data = await response.json();
+      setIsUpdated(!isUpdated);
       closeModal();
    };
 

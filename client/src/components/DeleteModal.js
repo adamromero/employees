@@ -16,12 +16,22 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const DeleteModal = ({ modalIsOpen, closeModal, employeeId }) => {
+const DeleteModal = ({
+   modalIsOpen,
+   closeModal,
+   employeeId,
+   isUpdated,
+   setIsUpdated,
+}) => {
    const handleDelete = async () => {
-      const response = await fetch(`http://localhost:5000/api/employees/${employeeId}`, {
-         method: "DELETE",
-      });
+      const response = await fetch(
+         `http://localhost:5000/api/employees/${employeeId}`,
+         {
+            method: "DELETE",
+         }
+      );
       //const data = await response.json();
+      setIsUpdated(!isUpdated);
       closeModal();
    };
 

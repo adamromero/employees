@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import EmployeeCard from "./components/EmployeeCard";
 import Loader from "./components/Loader";
 import InputModal from "./components/InputModal";
@@ -7,20 +7,22 @@ function App() {
    const [employees, setEmployees] = useState([]);
    const [loading, setLoading] = useState(true);
    const [modalIsOpen, setModalIsOpen] = useState(false);
-   //const [editModalState, setEditModalState] = useState(false);
+   const [isUpdated, setIsUpdated] = useState(false);
 
    useEffect(() => {
       getEmployees();
-      console.log("useEffect in app");
-   }, [employees]);
+      //console.log("useEffect in app");
+   }, [isUpdated]);
 
-   //look into useCallback https://stackoverflow.com/questions/62486028/how-do-i-properly-use-useeffect-for-a-async-fetch-call-with-react-react-hooks-e
-   const getEmployees = useCallback(async () => {
+   const getEmployees = async () => {
       const response = await fetch("http://localhost:5000/api/employees");
       const data = await response.json();
       setEmployees(data);
       setLoading(false);
-   }, [employees]);
+      //console.log("get employees function");
+   };
+
+   console.log("component rendered");
 
    return (
       <div>
@@ -30,7 +32,12 @@ function App() {
          ) : (
             <div className="employee-list">
                {employees.map((employee) => (
-                  <EmployeeCard key={employee._id} employee={employee} />
+                  <EmployeeCard
+                     key={employee._id}
+                     employee={employee}
+                     isUpdated={isUpdated}
+                     setIsUpdated={setIsUpdated}
+                  />
                ))}
             </div>
          )}
@@ -39,6 +46,8 @@ function App() {
          <InputModal
             modalIsOpen={modalIsOpen}
             closeModal={() => setModalIsOpen(false)}
+            isUpdated={isUpdated}
+            setIsUpdated={setIsUpdated}
          />
       </div>
    );
